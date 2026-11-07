@@ -79,8 +79,9 @@ def main():
             checked += 1
     home = (OUT / "index.html").read_text()
     books = json.loads((ROOT / "src/books.json").read_text())
-    assert len(books) == 10
-    assert len({book["id"] for book in books}) == 10
+    assert len(books) == 9
+    assert len({book["id"] for book in books}) == 9
+    assert "takase" not in {book["id"] for book in books}
     for book in books:
         assert 'id="book-' + book["id"] + '"' in home, book["title"]
     assert (OUT / ".nojekyll").is_file()
@@ -91,7 +92,7 @@ def main():
         assert "template=support.yml" in CONFIG["contact"]["url"]
         assert (ROOT / ".github/ISSUE_TEMPLATE/support.yml").is_file()
         assert "GitHubへのログインが必要" in (OUT / "support/index.html").read_text()
-    print(f"OK: {len(pages)} pages, {checked} references, 10 works, sitemap and contact configuration")
+    print(f"OK: {len(pages)} pages, {checked} references, 9 works, sitemap and contact configuration")
 
 
 if __name__ == "__main__":

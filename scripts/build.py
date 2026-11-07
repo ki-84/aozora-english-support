@@ -115,7 +115,7 @@ def home():
   <div class="actions">{first_cta}<a class="button secondary" href="support/">使い方・サポート</a></div><p class="availability">{availability}</p></div>
   <figure class="hero-visual"><div class="phone"><img src="assets/reader.png" width="662" height="1440" alt="英語の本文と、一文ずつの音読操作を備えたアプリの読書画面" fetchpriority="high"></div><figcaption class="screen-note">『注文の多い料理店』の実際の読書画面</figcaption></figure>
 </section>
-<div class="wrap promise-strip" aria-label="アプリの特長"><div>{icon('book')}<span>10作品を、すべて全文。</span></div><div>{icon('translate')}<span>一文ごとに、日本語訳。</span></div><div>{icon('offline')}<span>本文はオフラインで。</span></div></div>
+<div class="wrap promise-strip" aria-label="アプリの特長"><div>{icon('book')}<span>9作品を、すべて全文。</span></div><div>{icon('translate')}<span>一文ごとに、日本語訳。</span></div><div>{icon('offline')}<span>本文はオフラインで。</span></div></div>
 <section class="wrap section retelling-section" id="retelling" aria-labelledby="retelling-title">
   <div class="section-heading"><div><p class="eyebrow">CLASSIC STORIES, RETOLD IN SIMPLE ENGLISH</p><h2 id="retelling-title">名作を、やさしい英語で語り直す。</h2></div><p>出来事をひとつずつ、短い文で。<br>言葉の難しさをほどいて、物語はそのままに。</p></div>
   <p class="retelling-lead">原作の一文をそのまま英語に置き換えるのではなく、伝える内容を整理し、複数の短い英文で説明し直しています。難しい一語も、身近な言葉でわかる表現へ。場面・会話・結末まで残し、物語全体を読みやすい英語につくり直しました。</p>
@@ -134,12 +134,12 @@ def home():
   <div class="reading-copy"><p class="eyebrow">ONE SENTENCE AT A TIME</p><h2 id="translation-title">わからない一文で、<br>物語を止めない。</h2><p>「この文、どういう意味だろう」。<br>日本語で確かめたら、また英語のつづきへ。<br>一文ずつの対訳が、読む時間を支えます。</p><p class="fine">この文章で、対訳を確認する感覚をお試しください。<br>日本語訳は英文に合わせて制作したもので、原文とは別に表示します。</p></div>
   <div class="quote-card"><p class="quote-label">注文の多い料理店 / THE RESTAURANT OF MANY ORDERS</p><p class="sample-english" lang="en">Two young men were walking deep in the mountains.</p><button type="button" class="translation-toggle" data-translation-toggle aria-expanded="false" aria-controls="sample-translation">{icon('translate')}<span>日本語訳を見る</span></button><div class="translation" id="sample-translation" hidden><p>二人の若い男が山奥を歩いていました。</p><small>この英文に対応する日本語訳</small></div><noscript><div class="translation"><p>二人の若い男が山奥を歩いていました。</p></div></noscript><cite class="quote-credit">原作：宮沢賢治『注文の多い料理店』／英訳・日本語訳：本アプリ独自制作</cite></div>
 </div></section>
-<section class="wrap section" aria-labelledby="books-title"><div class="section-heading"><div><p class="eyebrow">TEN CLASSICS, COMPLETE STORIES</p><h2 id="books-title">あの名作を、もう一度。</h2></div><p>短い寓話から、先が気になるミステリーまで。<br>10作品すべてを、全文英訳で。</p></div><ol class="book-grid">{book_cards()}</ol><p class="book-note">中学英語は制作上の目安です。固有名詞や、物語を伝えるために必要な言葉も含まれます。</p></section>
+<section class="wrap section" aria-labelledby="books-title"><div class="section-heading"><div><p class="eyebrow">NINE CLASSICS, COMPLETE STORIES</p><h2 id="books-title">あの名作を、もう一度。</h2></div><p>短い寓話から、先が気になるミステリーまで。<br>9作品すべてを、全文英訳で。</p></div><ol class="book-grid">{book_cards()}</ol><p class="book-note">中学英語は制作上の目安です。固有名詞や、物語を伝えるために必要な言葉も含まれます。</p></section>
 <section class="wrap section" aria-labelledby="listen-title"><div class="listen-panel"><div><p class="eyebrow">READ. LISTEN. RETURN.</p><h2 id="listen-title">目で読んで、耳で聴く。</h2><p>Apple音声ですぐに音読。0.5〜2倍速で、今の自分に合う速さを選べます。再生中の文を追いながら、画面をロックして聴くこともできます。</p><p>任意で音声合成モデル「Supertonic 3」（約380MB）を取得すると、iPhone内で英文から高品質な音声を生成できます。取得後は通信せずに音読できます。本文・対訳はダウンロードなしでオフライン閲覧できます。</p></div><div class="audio-graphic" aria-label="0.5倍から2倍までの音読速度に対応"><div class="waveform" aria-hidden="true">{bars}</div><div class="rate-list"><span>0.5×</span><span>0.75×</span><strong>1.0×</strong><span>1.5×</span><span>2.0×</span></div><p>ログイン・広告・アプリ内課金なし</p></div></div></section>
 <section class="wrap learning" aria-labelledby="learning-title"><div><p class="eyebrow">THE JOY OF UNDERSTANDING</p><h2 id="learning-title">わかる英語を、<br>たっぷり読む。</h2><p>自分にとって読みやすい文章を、内容を楽しみながら読みつづける。「多読」の考え方をヒントに、やさしい英語と一文の対訳を組み合わせました。理論と参考文献はアプリ内でも紹介しています。</p><a href="sources/#learning">学習方針と参考文献について {icon('arrow')}</a></div><p class="margin-note">読みたいから、読む。<br>わかるから、つづく。<br>そんな英語の時間を。</p></section>
 <section class="wrap last-cta" aria-label="使い方へ"><div><h2>次の一文から、始めよう。</h2><p>読み方や音読、データの保存について、サポートでご案内しています。</p></div><a class="button" href="support/">使い方をみる {icon('arrow')}</a></section>
 </main>'''
-    return page("", "名作のつづきが、英語で読める。", "原作の長い一文を複数の短い英文に。難しい表現を身近な言葉で説明し直し、中学英語を目安に語り直した日本の名作10作品。一文の日本語訳と音読も使えるiPhoneリーダー。", body)
+    return page("", "名作のつづきが、英語で読める。", "原作の長い一文を複数の短い英文に。難しい表現を身近な言葉で説明し直し、中学英語を目安に語り直した日本の名作9作品。一文の日本語訳と音読も使えるiPhoneリーダー。", body)
 
 def document(slug, title, intro, toc, content):
     links = "".join(f'<a href="#{key}">{e(label)}</a>' for key, label in toc)
@@ -155,7 +155,7 @@ def support():
         ("音が出ない、または音読が止まりました。", "iPhoneの音量と音声の出力先、Bluetooth接続を確認してください。「音声と速度」でApple音声を選び、再生ボタンを押してお試しください。着信やイヤホンの取り外し、対訳を開いたときは一時停止する仕様です。対訳を閉じると、その直前に再生していた場合のみ再開します。"),
         ("高品質音声が選べません。", "高品質音声は、音声合成モデル「Supertonic 3」（約380MB）をすべて取得すると選択できます。取得後は、そのモデルを使ってiPhone内で英文から音声を生成します。「音声と速度」からダウンロードしてください。通信状態と空き容量を確認し、Wi-Fiでの取得をおすすめします。未取得の間もApple音声は使えます。"),
         ("音声のダウンロードに失敗・中断した場合は？", "通信状態と十分な空き容量を確認して、もう一度ダウンロードしてください。取得が完了したファイルは再利用されます。取得・合成に失敗した場合もApple音声で読むことができます。"),
-        ("インターネットにつながっていなくても使えますか？", "10作品の本文と日本語訳・原文はアプリに同梱しています。端末に用意されているApple音声と、取得済みの高品質音声は端末内で音読します。高品質音声の初回取得、出典や問い合わせなどの外部リンクを開くときは通信が必要です。"),
+        ("インターネットにつながっていなくても使えますか？", "9作品の本文と日本語訳・原文はアプリに同梱しています。端末に用意されているApple音声と、取得済みの高品質音声は端末内で音読します。高品質音声の初回取得、出典や問い合わせなどの外部リンクを開くときは通信が必要です。"),
         ("文字が読みにくい・背景を変えたい。", "読書画面右上の「Aa」から、文字サイズ・行間・背景を変えられます。「紙・白・夜」を選ぶと、設定画面の文字や操作部もその場で切り替わります。"),
         ("どこまで読んだかは保存されますか？", "読書位置と音読位置は別に端末へ保存します。再起動後も保存した位置へ戻れます。音読は自動開始せず、再生ボタンを押すと保存した文の先頭から再開します。アプリ内の前後操作は文単位、ロック画面の前後操作は段落単位です。"),
         ("機種変更やアプリの削除をするとどうなりますか？", "本アプリ独自のクラウド同期はありません。アプリを削除すると端末内の読書記録と音声合成モデルも削除されます。iOSのバックアップや端末移行からの復元はAppleの設定・機能に従います。音声モデルはバックアップの対象外のため、必要に応じて再取得してください。"),
@@ -167,7 +167,7 @@ def support():
 <section id="start"><h2>最初の読み方</h2><ol class="steps-list"><li>本棚で作品を選び、スワイプや左右端のタップで読み進めます。</li><li>意味を確かめたい英文を一文タップすると、その文の日本語訳が開きます。</li><li>音読は下部の「音読する」から。前の文・次の文への移動や、0.5〜2倍速に対応します。</li><li>右上の「Aa」で文字や背景、ヘッドホンのボタンで音声と速度を変えられます。</li></ol><div class="support-topics"><a href="#faq">{icon('help')}よくある質問</a><a href="../privacy/">{icon('book')}データの取り扱い</a><a href="../sources/">{icon('book')}原文と出典</a></div></section>
 <section class="faq" id="faq"><h2>よくある質問</h2>{faq_html}</section>
 <section id="report"><h2>不具合のご報告に添えてほしいこと</h2><p>わかる範囲で、次の内容を添えていただくと確認がスムーズです。</p><ul><li>どの画面で、何をしたときに、何が起きたか</li><li>iPhoneの機種・iOSとアプリのバージョン</li><li>本文・訳の場合は、作品名と該当する短い文</li><li>音読の場合は、Apple音声／高品質音声と再生速度</li></ul><p>スクリーンショットは、個人情報が写っていないことを確認して添付してください。</p><a class="button secondary" href="{e(CONTACT['url'])}">フォームを開く {icon('arrow')}</a></section>
-<section id="environment"><h2>対応環境</h2><p>iOS 17以降のiPhoneに対応しています。本文10作品と対訳は同梱され、ログインは不要です。広告・アプリ内課金・アプリ独自のクラウド同期はありません。</p><p class="updated">ページ更新：{e(CONFIG['updated'])}</p></section>'''
+<section id="environment"><h2>対応環境</h2><p>iOS 17以降のiPhoneに対応しています。本文9作品と対訳は同梱され、ログインは不要です。広告・アプリ内課金・アプリ独自のクラウド同期はありません。</p><p class="updated">ページ更新：{e(CONFIG['updated'])}</p></section>'''
     return document("support", "サポート", "使い方や、お困りのときの確認方法をご案内します。解決しない場合はお問い合わせフォームからご連絡ください。", [("contact","お問い合わせ"),("start","最初の読み方"),("faq","よくある質問"),("report","不具合のご報告"),("environment","対応環境")], content)
 
 def privacy():
