@@ -1,0 +1,16 @@
+name: ご意見・機能のご要望
+description: 読み心地や、追加してほしい機能・作品について。
+title: "[ご意見] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        いただいたご意見は今後の改善の参考にします。
+        **投稿は公開されます。** 個人情報は含めないでください。回答はこのIssue上で行います。
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: ご意見・ご要望
+      description: どのような場面で、どのように使いたいかを教えてください。
+    validations:
+      required: true

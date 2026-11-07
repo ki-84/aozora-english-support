@@ -1,0 +1,42 @@
+name: 不具合・使い方のお問い合わせ
+description: アプリの不具合や、使い方についてお問い合わせください。
+title: "[サポート] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        お問い合わせありがとうございます。開発者がこのIssue上で回答します。
+        **この投稿と添付画像はインターネットに公開されます。** 氏名・メールアドレス・電話番号・パスワードなどの個人情報は書かないでください。
+        使い方は [サポートページ](https://ki-84.github.io/aozora-english-support/support/) でも確認できます。
+  - type: dropdown
+    id: category
+    attributes:
+      label: お問い合わせの種類
+      options:
+        - 使い方について
+        - 本文・日本語訳について
+        - 音読について
+        - 高品質音声のダウンロードについて
+        - 表示・操作について
+        - プライバシー・投稿の取り扱いについて
+        - その他
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: お困りの内容
+      description: どの画面で、何をしたときに、どのようになったかを教えてください。
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 端末・iOS・アプリのバージョン（任意）
+      description: わかる範囲で構いません。端末のシリアル番号や識別子は不要です。
+      placeholder: "例：iPhone 16 / iOS 18.5 / アプリ 1.0"
+  - type: input
+    id: book
+    attributes:
+      label: 作品名・該当箇所（任意）
+      description: 本文や訳についてのお問い合わせは、作品名と短い該当文を添えると確認がスムーズです。

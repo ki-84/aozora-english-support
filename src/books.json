@@ -1,0 +1,82 @@
+[
+  {
+    "id": "restaurant",
+    "title": "注文の多い料理店",
+    "englishTitle": "The Restaurant of Many Orders",
+    "author": "宮沢賢治",
+    "color": "49675B",
+    "cardURL": "https://www.aozora.gr.jp/cards/000081/card43754.html"
+  },
+  {
+    "id": "melos",
+    "title": "走れメロス",
+    "englishTitle": "Run, Melos!",
+    "author": "太宰治",
+    "color": "A26743",
+    "cardURL": "https://www.aozora.gr.jp/cards/000035/card1567.html"
+  },
+  {
+    "id": "chair",
+    "title": "人間椅子",
+    "englishTitle": "The Human Chair",
+    "author": "江戸川乱歩",
+    "color": "65576F",
+    "cardURL": "https://www.aozora.gr.jp/cards/001779/card56648.html"
+  },
+  {
+    "id": "spider",
+    "title": "蜘蛛の糸",
+    "englishTitle": "The Spider's Thread",
+    "author": "芥川龍之介",
+    "color": "607387",
+    "cardURL": "https://www.aozora.gr.jp/cards/000879/card92.html"
+  },
+  {
+    "id": "rashomon",
+    "title": "羅生門",
+    "englishTitle": "Rashomon",
+    "author": "芥川龍之介",
+    "color": "81574E",
+    "cardURL": "https://www.aozora.gr.jp/cards/000879/card127.html"
+  },
+  {
+    "id": "grove",
+    "title": "藪の中",
+    "englishTitle": "In a Grove",
+    "author": "芥川龍之介",
+    "color": "506C61",
+    "cardURL": "https://www.aozora.gr.jp/cards/000879/card179.html"
+  },
+  {
+    "id": "tiger",
+    "title": "山月記",
+    "englishTitle": "The Moon over the Mountain",
+    "author": "中島敦",
+    "color": "6E7185",
+    "cardURL": "https://www.aozora.gr.jp/cards/000119/card624.html"
+  },
+  {
+    "id": "gon",
+    "title": "ごん狐",
+    "englishTitle": "Gon, the Little Fox",
+    "author": "新美南吉",
+    "color": "AB754B",
+    "cardURL": "https://www.aozora.gr.jp/cards/000121/card628.html"
+  },
+  {
+    "id": "nose",
+    "title": "鼻",
+    "englishTitle": "The Nose",
+    "author": "芥川龍之介",
+    "color": "8A7661",
+    "cardURL": "https://www.aozora.gr.jp/cards/000879/card42.html"
+  },
+  {
+    "id": "takase",
+    "title": "高瀬舟",
+    "englishTitle": "The Takase Boat",
+    "author": "森鴎外",
+    "color": "547982",
+    "cardURL": "https://www.aozora.gr.jp/cards/000129/card691.html"
+  }
+]

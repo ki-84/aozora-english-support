@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 使い方・よくある質問
+    url: https://ki-84.github.io/aozora-english-support/support/
+    about: 読み方、音読、音声の取得、データの保存について。
+  - name: プライバシーポリシー
+    url: https://ki-84.github.io/aozora-english-support/privacy/
+    about: アプリと問い合わせの情報の取り扱いについて。
