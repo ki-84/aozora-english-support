@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """Build a small, dependency-free, readable-without-JavaScript support site."""
 import json
+import hashlib
 import shutil
 from html import escape
 from pathlib import Path
@@ -52,6 +53,7 @@ def page(slug, title, description, body, absolute_assets=False):
     prefix = BASE + "/" if absolute_assets else ("../" if slug else "./")
     link = lambda path: prefix + path
     canonical = BASE + (f"/{slug}/" if slug else "/")
+    asset = lambda name: link("assets/" + name) + "?v=" + hashlib.sha256((ROOT / "src/assets" / name).read_bytes()).hexdigest()[:12]
     nav_support = ' aria-current="page"' if slug == "support" else ""
     return f'''<!doctype html>
 <html lang="ja">
@@ -73,8 +75,8 @@ def page(slug, title, description, body, absolute_assets=False):
   <meta name="theme-color" content="#f8f6f0">
   <link rel="icon" href="{link('assets/favicon.png')}" type="image/png">
   <link rel="apple-touch-icon" href="{link('assets/app-icon.png')}">
-  <link rel="stylesheet" href="{link('assets/site.css')}">
-  <script src="{link('assets/site.js')}" defer></script>
+  <link rel="stylesheet" href="{asset('site.css')}">
+  <script src="{asset('site.js')}" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">本文へスキップ</a>
@@ -129,11 +131,11 @@ def home():
   </div>
 </section>
 <section class="reading-section" aria-labelledby="translation-title"><div class="wrap reading-grid">
-  <div class="reading-copy"><p class="eyebrow">ONE SENTENCE AT A TIME</p><h2 id="translation-title">わからない一文で、<br>物語を止めない。</h2><p>「この文、どういう意味だろう」。<br>日本語で確かめたら、また英語のつづきへ。<br>一文ずつの対訳が、読む時間を支えます。</p><p class="fine">右の文章で、対訳を確認する感覚をお試しください。<br>日本語訳は英文に合わせて制作したもので、原文とは別に表示します。</p></div>
+  <div class="reading-copy"><p class="eyebrow">ONE SENTENCE AT A TIME</p><h2 id="translation-title">わからない一文で、<br>物語を止めない。</h2><p>「この文、どういう意味だろう」。<br>日本語で確かめたら、また英語のつづきへ。<br>一文ずつの対訳が、読む時間を支えます。</p><p class="fine">この文章で、対訳を確認する感覚をお試しください。<br>日本語訳は英文に合わせて制作したもので、原文とは別に表示します。</p></div>
   <div class="quote-card"><p class="quote-label">注文の多い料理店 / THE RESTAURANT OF MANY ORDERS</p><p class="sample-english" lang="en">Two young men were walking deep in the mountains.</p><button type="button" class="translation-toggle" data-translation-toggle aria-expanded="false" aria-controls="sample-translation">{icon('translate')}<span>日本語訳を見る</span></button><div class="translation" id="sample-translation" hidden><p>二人の若い男が山奥を歩いていました。</p><small>この英文に対応する日本語訳</small></div><noscript><div class="translation"><p>二人の若い男が山奥を歩いていました。</p></div></noscript><cite class="quote-credit">原作：宮沢賢治『注文の多い料理店』／英訳・日本語訳：本アプリ独自制作</cite></div>
 </div></section>
 <section class="wrap section" aria-labelledby="books-title"><div class="section-heading"><div><p class="eyebrow">TEN CLASSICS, COMPLETE STORIES</p><h2 id="books-title">あの名作を、もう一度。</h2></div><p>短い寓話から、先が気になるミステリーまで。<br>10作品すべてを、全文英訳で。</p></div><ol class="book-grid">{book_cards()}</ol><p class="book-note">中学英語は制作上の目安です。固有名詞や、物語を伝えるために必要な言葉も含まれます。</p></section>
-<section class="wrap section" aria-labelledby="listen-title"><div class="listen-panel"><div><p class="eyebrow">READ. LISTEN. RETURN.</p><h2 id="listen-title">目で読んで、耳で聴く。</h2><p>Apple音声ですぐに音読。0.5〜2倍速で、今の自分に合う速さを選べます。再生中の文を追いながら、画面をロックして聴くこともできます。</p><p>任意で約380MBの音声データを取得すると、高品質音声も端末内で使えます。本文・対訳はダウンロードなしでオフライン閲覧できます。</p></div><div class="audio-graphic" aria-label="0.5倍から2倍までの音読速度に対応"><div class="waveform" aria-hidden="true">{bars}</div><div class="rate-list"><span>0.5×</span><span>0.75×</span><strong>1.0×</strong><span>1.5×</span><span>2.0×</span></div><p>ログイン・広告・アプリ内課金なし</p></div></div></section>
+<section class="wrap section" aria-labelledby="listen-title"><div class="listen-panel"><div><p class="eyebrow">READ. LISTEN. RETURN.</p><h2 id="listen-title">目で読んで、耳で聴く。</h2><p>Apple音声ですぐに音読。0.5〜2倍速で、今の自分に合う速さを選べます。再生中の文を追いながら、画面をロックして聴くこともできます。</p><p>任意で音声合成モデル「Supertonic 3」（約380MB）を取得すると、iPhone内で英文から高品質な音声を生成できます。取得後は通信せずに音読できます。本文・対訳はダウンロードなしでオフライン閲覧できます。</p></div><div class="audio-graphic" aria-label="0.5倍から2倍までの音読速度に対応"><div class="waveform" aria-hidden="true">{bars}</div><div class="rate-list"><span>0.5×</span><span>0.75×</span><strong>1.0×</strong><span>1.5×</span><span>2.0×</span></div><p>ログイン・広告・アプリ内課金なし</p></div></div></section>
 <section class="wrap learning" aria-labelledby="learning-title"><div><p class="eyebrow">THE JOY OF UNDERSTANDING</p><h2 id="learning-title">わかる英語を、<br>たっぷり読む。</h2><p>自分にとって読みやすい文章を、内容を楽しみながら読みつづける。「多読」の考え方をヒントに、やさしい英語と一文の対訳を組み合わせました。理論と参考文献はアプリ内でも紹介しています。</p><a href="sources/#learning">学習方針と参考文献について {icon('arrow')}</a></div><p class="margin-note">読みたいから、読む。<br>わかるから、つづく。<br>そんな英語の時間を。</p></section>
 <section class="wrap last-cta" aria-label="使い方へ"><div><h2>次の一文から、始めよう。</h2><p>読み方や音読、データの保存について、サポートでご案内しています。</p></div><a class="button" href="support/">使い方をみる {icon('arrow')}</a></section>
 </main>'''
@@ -151,12 +153,12 @@ def support():
         ("日本語訳はどうやって見ますか？", "本文の英文を一文タップすると、その英文と対応する日本語訳が開きます。左右端のタップはページ送りです。下部の「対訳」を選ぶと、本文にも英語と日本語訳を並べられます。"),
         ("日本語訳と青空文庫の原文は違いますか？", "一文の日本語訳は、短く書き直した英文に合わせて独自に制作したものです。原文を読むには、対訳パネルの「青空文庫の原文」を開いてください。その文を含む段落の原文を、末尾までスクロールして確認できます。"),
         ("音が出ない、または音読が止まりました。", "iPhoneの音量と音声の出力先、Bluetooth接続を確認してください。「音声と速度」でApple音声を選び、再生ボタンを押してお試しください。着信やイヤホンの取り外し、対訳を開いたときは一時停止する仕様です。対訳を閉じると、その直前に再生していた場合のみ再開します。"),
-        ("高品質音声が選べません。", "高品質音声は、約380MBのデータをすべて取得すると選択できます。「音声と速度」からダウンロードしてください。通信状態と空き容量を確認し、Wi-Fiでの取得をおすすめします。未取得の間もApple音声は使えます。"),
+        ("高品質音声が選べません。", "高品質音声は、音声合成モデル「Supertonic 3」（約380MB）をすべて取得すると選択できます。取得後は、そのモデルを使ってiPhone内で英文から音声を生成します。「音声と速度」からダウンロードしてください。通信状態と空き容量を確認し、Wi-Fiでの取得をおすすめします。未取得の間もApple音声は使えます。"),
         ("音声のダウンロードに失敗・中断した場合は？", "通信状態と十分な空き容量を確認して、もう一度ダウンロードしてください。取得が完了したファイルは再利用されます。取得・合成に失敗した場合もApple音声で読むことができます。"),
         ("インターネットにつながっていなくても使えますか？", "10作品の本文と日本語訳・原文はアプリに同梱しています。端末に用意されているApple音声と、取得済みの高品質音声は端末内で音読します。高品質音声の初回取得、出典や問い合わせなどの外部リンクを開くときは通信が必要です。"),
         ("文字が読みにくい・背景を変えたい。", "読書画面右上の「Aa」から、文字サイズ・行間・背景を変えられます。「紙・白・夜」を選ぶと、設定画面の文字や操作部もその場で切り替わります。"),
         ("どこまで読んだかは保存されますか？", "読書位置と音読位置は別に端末へ保存します。再起動後も保存した位置へ戻れます。音読は自動開始せず、再生ボタンを押すと保存した文の先頭から再開します。アプリ内の前後操作は文単位、ロック画面の前後操作は段落単位です。"),
-        ("機種変更やアプリの削除をするとどうなりますか？", "本アプリ独自のクラウド同期はありません。アプリを削除すると端末内の読書記録と音声データも削除されます。iOSのバックアップや端末移行からの復元はAppleの設定・機能に従います。音声モデルはバックアップの対象外のため、必要に応じて再取得してください。"),
+        ("機種変更やアプリの削除をするとどうなりますか？", "本アプリ独自のクラウド同期はありません。アプリを削除すると端末内の読書記録と音声合成モデルも削除されます。iOSのバックアップや端末移行からの復元はAppleの設定・機能に従います。音声モデルはバックアップの対象外のため、必要に応じて再取得してください。"),
         ("中学で習った単語だけで読めますか？", "中学英語を学び終えた方が読み進めやすいよう、短い文・基本的な語順・身近な言葉で制作しています。固有名詞や物語に必要な文化的な語も含みます。読みやすさには個人差があるため、難しい一文は日本語訳で確かめながらお楽しみください。"),
         ("アカウント登録は必要ですか？", "アプリの読書・音読にアカウント登録は不要です。サポートの問い合わせをGitHubで送信する場合のみ、GitHubへのログインが必要です。" if IS_GITHUB else "アプリの読書・音読にアカウント登録は不要です。問い合わせフォームは送信画面の案内に従ってご利用ください。"),
     ]
@@ -173,11 +175,11 @@ def privacy():
     provider_link = '<a href="https://docs.github.com/ja/site-policy/privacy-policies/github-general-privacy-statement">GitHubのプライバシーに関する声明</a>' if IS_GITHUB else '<a href="https://policies.google.com/privacy?hl=ja">Googleのプライバシーポリシー</a>'
     content = f'''<div class="policy-summary"><p><strong>読むためのデータは、端末の中に。</strong><br>本アプリの開発者は、読んだ作品・本文・読書位置・音読内容を収集・送信する機能を設けていません。問い合わせは外部サービスで別に受け付けます。</p></div>
 <section id="scope"><h2>1. 適用範囲と運営者</h2><p>このポリシーは「{e(NAME)}」（以下「本アプリ」）と、その紹介・サポートサイトに適用します。運営者は <a href="https://github.com/{e(CONFIG['owner'])}">{e(CONFIG['owner'])}</a> です。お問い合わせは<a href="../support/#contact">サポート窓口</a>から受け付けます。</p></section>
-<section id="device"><h2>2. アプリ内で保存する情報</h2><p>読書・音読を再開するための位置、読了状態、表示テーマ・文字サイズ・行間、対訳の表示、音声と再生速度の設定を端末内に保存します。任意で取得した高品質音声モデルも端末内に保存し、合成音声の一時ファイルは再生処理に使用します。</p><p>本アプリ独自のアカウント登録、広告配信、行動解析、他アプリをまたぐトラッキング、クラウド同期の機能は設けていません。端末内の読書記録や設定を開発者のサーバーへ送信しません。</p></section>
+<section id="device"><h2>2. アプリ内で保存する情報</h2><p>読書・音読を再開するための位置、読了状態、表示テーマ・文字サイズ・行間、対訳の表示、音声と再生速度の設定を端末内に保存します。任意で取得した高品質音声の音声合成モデルも端末内に保存し、合成音声の一時ファイルは再生処理に使用します。</p><p>本アプリ独自のアカウント登録、広告配信、行動解析、他アプリをまたぐトラッキング、クラウド同期の機能は設けていません。端末内の読書記録や設定を開発者のサーバーへ送信しません。</p></section>
 <section id="network"><h2>3. 音声とネットワーク通信</h2><p>Apple音声はiOSの読み上げ機能を利用し、高品質音声は取得済みのSupertonic 3モデルを使って端末内で合成します。本アプリが本文を外部の翻訳API・音声合成APIへ送信する構成ではありません。</p><p>高品質音声のデータをダウンロードするときはGitHub Releasesとその配信先へ接続します。この通信では配信事業者がIPアドレスなど通信に必要な情報を処理する場合があります。作品の閲覧履歴・読書位置・音読内容はダウンロード先へ送信しません。</p><p>出典・参考文献・サポートなどの外部リンクを選ぶと外部サイトを開きます。リンク先にはそのサービスの規約とプライバシーポリシーが適用されます。</p></section>
 <section id="contact-data"><h2>4. お問い合わせの情報</h2><p>{contact_paragraph}</p><p>問い合わせサービスによる情報の取り扱いは、{provider_link}もご確認ください。</p></section>
 <section id="website"><h2>5. このウェブサイト</h2><p>本サイトはGitHub Pagesで配信しています。本サイト独自の広告、アクセス解析、追跡用Cookieは使用しません。サイト配信に伴うアクセス情報はGitHubが取り扱う場合があります。詳しくは<a href="https://docs.github.com/ja/site-policy/privacy-policies/github-general-privacy-statement">GitHubのプライバシーに関する声明</a>をご確認ください。</p></section>
-<section id="delete"><h2>6. 端末内データの削除・バックアップ</h2><p>iPhoneの設定から本アプリを削除すると、端末内の読書記録・設定・取得した音声データも削除されます。「Appを取り除く」はデータを保持するiOSの機能のため、削除する場合は「Appを削除」を選んでください。</p><p>iOSが提供するバックアップ・端末移行・診断などはAppleの設定とポリシーに従います。本アプリ独自のクラウド同期とは別の仕組みです。音声モデルの保存場所はバックアップ対象外としています。</p></section>
+<section id="delete"><h2>6. 端末内データの削除・バックアップ</h2><p>iPhoneの設定から本アプリを削除すると、端末内の読書記録・設定・取得した音声合成モデルも削除されます。「Appを取り除く」はデータを保持するiOSの機能のため、削除する場合は「Appを削除」を選んでください。</p><p>iOSが提供するバックアップ・端末移行・診断などはAppleの設定とポリシーに従います。本アプリ独自のクラウド同期とは別の仕組みです。音声モデルの保存場所はバックアップ対象外としています。</p></section>
 <section id="change"><h2>7. ポリシーの変更・連絡先</h2><p>機能や情報の取り扱いを変更した場合は、このページを更新します。本ポリシーについてのご相談も<a href="../support/#contact">お問い合わせフォーム</a>からお送りください。</p><p class="updated">制定・最終更新：{e(CONFIG['updated'])}</p></section>'''
     return document("privacy", "プライバシーポリシー", "アプリの読書データ、音声、外部サービス、お問い合わせに関する情報の取り扱いを説明します。", [("scope","適用範囲"),("device","端末内の情報"),("network","音声と通信"),("contact-data","お問い合わせ"),("website","ウェブサイト"),("delete","削除とバックアップ"),("change","変更・連絡先")], content)
 
