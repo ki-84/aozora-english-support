@@ -27,6 +27,7 @@ http://127.0.0.1:8764/ を開きます。`src/`や設定を変更したら再生
 | `site.json` | アプリ名、公開URL、問い合わせ、App Storeリンク |
 | `scripts/build.py` | 全ページの本文とHTML生成 |
 | `src/books.json` | 10作品の著者・タイトル・原作リンク |
+| `src/retelling-sample.json` | 語り直しの実例。アプリ収録の原文1文と英文7文 |
 | `src/assets/` | 共通CSS・JS、アイコン、実際のアプリ画面 |
 | `.github/ISSUE_TEMPLATE/` | 問い合わせ・要望フォーム |
 | `docs/` | GitHub Pagesへ公開する生成物 |

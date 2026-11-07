@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """Build a small, dependency-free, readable-without-JavaScript support site."""
 import json
 import shutil
@@ -10,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "docs"
 CONFIG = json.loads((ROOT / "site.json").read_text())
 BOOKS = json.loads((ROOT / "src/books.json").read_text())
+SAMPLE = json.loads((ROOT / "src/retelling-sample.json").read_text())
 NAME = CONFIG["name"]
 BASE = CONFIG["base_url"].rstrip("/")
 CONTACT = CONFIG["contact"]
@@ -100,21 +102,28 @@ def book_cards():
 
 def home():
     store = CONFIG.get("app_store_url")
-    first_cta = f'<a class="button blue" href="{e(store)}">App Storeで見る {icon("arrow")}</a>' if store else f'<a class="button blue" href="#reading">読み方をみる {icon("arrow")}</a>'
+    first_cta = f'<a class="button blue" href="{e(store)}">App Storeで見る {icon("arrow")}</a>' if store else f'<a class="button blue" href="#retelling">英文の実例を見る {icon("arrow")}</a>'
+    sample_sentences = "".join(f'<li>{e(sentence)}</li>' for sentence in SAMPLE['english'])
     availability = "iPhone / iOS 17以降" if store else "iPhone / iOS 17以降 · アプリの公開準備中"
     bars = "".join(f'<i style="--h:{h}px"></i>' for h in [12,24,38,20,48,64,42,72,54,34,61,44,29,52,36,20,13])
     body = f'''<main id="main">
 <section class="wrap hero" aria-labelledby="hero-title">
   <div class="hero-copy"><p class="eyebrow">{e(CONFIG['subtitle'])}</p><h1 id="hero-title"><span>名作のつづきが、</span><span><em>英語で読める。</em></span></h1>
-  <p class="hero-lead">宮沢賢治、太宰治、芥川龍之介。<br>日本の名作を、短い文と身近な言葉で。<br>英語を学び直したい大人のための、<br>読むことに夢中になれるリーダーです。</p>
+  <p class="hero-lead">原作の長い一文は、いくつもの短い英文に。<br>難しい表現は、身近な言葉で説明し直す。<br>日本の名作を、中学英語を目安に語り直しました。</p><p class="hero-audience">英語を学び直したい大人のための読書アプリ。</p>
   <div class="actions">{first_cta}<a class="button secondary" href="support/">使い方・サポート</a></div><p class="availability">{availability}</p></div>
   <figure class="hero-visual"><div class="phone"><img src="assets/reader.png" width="662" height="1440" alt="英語の本文と、一文ずつの音読操作を備えたアプリの読書画面" fetchpriority="high"></div><figcaption class="screen-note">『注文の多い料理店』の実際の読書画面</figcaption></figure>
 </section>
 <div class="wrap promise-strip" aria-label="アプリの特長"><div>{icon('book')}<span>10作品を、すべて全文。</span></div><div>{icon('translate')}<span>一文ごとに、日本語訳。</span></div><div>{icon('offline')}<span>本文はオフラインで。</span></div></div>
+<section class="wrap section retelling-section" id="retelling" aria-labelledby="retelling-title">
+  <div class="section-heading"><div><p class="eyebrow">CLASSIC STORIES, RETOLD IN SIMPLE ENGLISH</p><h2 id="retelling-title">名作を、やさしい英語で語り直す。</h2></div><p>出来事をひとつずつ、短い文で。<br>言葉の難しさをほどいて、物語はそのままに。</p></div>
+  <p class="retelling-lead">原作の一文をそのまま英語に置き換えるのではなく、伝える内容を整理し、複数の短い英文で説明し直しています。難しい一語も、身近な言葉でわかる表現へ。場面・会話・結末まで残し、物語全体を読みやすい英語につくり直しました。</p>
+  <div class="retelling-example"><div class="original-example"><p class="example-label">原作の、長い一文</p><blockquote>{e(SAMPLE['japanese'])}</blockquote><p class="example-source">{e(SAMPLE['author'])}『{e(SAMPLE['title'])}』冒頭<br><a href="{e(SAMPLE['sourceURL'])}">青空文庫の原文を読む ↗</a></p></div>
+  <div class="english-example"><p class="example-label">アプリでは、{len(SAMPLE['english'])}つの短い英文に。</p><ol lang="en">{sample_sentences}</ol><p class="example-source">実際に収録している英文です。一文ずつ、場面を思い浮かべながら読めます。</p></div></div>
+</section>
 <section class="wrap section" id="reading" aria-labelledby="reading-title">
   <div class="section-heading"><div><p class="eyebrow">A STORY, AT YOUR PACE</p><h2 id="reading-title">物語を、自分のペースで。</h2></div><p>気になる一文を確かめながら、<br>英語で読む時間を少しずつ。</p></div>
   <div class="step-grid">
-    <article class="step"><div class="number">01</div><div><h3>やさしい英語で、読む。</h3><p>中学英語を目安に、原作の物語を短い英文へ。場面や会話、結末まで、全文を収録しています。</p></div></article>
+    <article class="step"><div class="number">01</div><div><h3>語り直した英語で、読む。</h3><p>長い一文は短く分け、難しい表現は説明し直す。中学英語を目安に、物語を丸ごと読みやすくしています。</p></div></article>
     <article class="step"><div class="number">02</div><div><h3>その一文だけ、確かめる。</h3><p>英文をタップすると、その文に対応する自然な日本語訳へ。青空文庫の原文も別に参照できます。</p></div></article>
     <article class="step"><div class="number">03</div><div><h3>耳でも、つづきを楽しむ。</h3><p>音読しながら、今の文を目で追って。速度も文字の大きさも、読みやすい設定に変えられます。</p></div></article>
   </div>
@@ -128,7 +137,7 @@ def home():
 <section class="wrap learning" aria-labelledby="learning-title"><div><p class="eyebrow">THE JOY OF UNDERSTANDING</p><h2 id="learning-title">わかる英語を、<br>たっぷり読む。</h2><p>自分にとって読みやすい文章を、内容を楽しみながら読みつづける。「多読」の考え方をヒントに、やさしい英語と一文の対訳を組み合わせました。理論と参考文献はアプリ内でも紹介しています。</p><a href="sources/#learning">学習方針と参考文献について {icon('arrow')}</a></div><p class="margin-note">読みたいから、読む。<br>わかるから、つづく。<br>そんな英語の時間を。</p></section>
 <section class="wrap last-cta" aria-label="使い方へ"><div><h2>次の一文から、始めよう。</h2><p>読み方や音読、データの保存について、サポートでご案内しています。</p></div><a class="button" href="support/">使い方をみる {icon('arrow')}</a></section>
 </main>'''
-    return page("", "名作のつづきが、英語で読める。", "中学英語を目安に書き直した日本の名作10作品を全文収録。一文ごとの日本語訳と音読で、読む時間を楽しむiPhoneリーダー。", body)
+    return page("", "名作のつづきが、英語で読める。", "原作の長い一文を複数の短い英文に。難しい表現を身近な言葉で説明し直し、中学英語を目安に語り直した日本の名作10作品。一文の日本語訳と音読も使えるiPhoneリーダー。", body)
 
 def document(slug, title, intro, toc, content):
     links = "".join(f'<a href="#{key}">{e(label)}</a>' for key, label in toc)
@@ -138,6 +147,7 @@ def support():
     provider = "GitHub" if IS_GITHUB else "Google"
     feedback = CONTACT.get("feedback_url", CONTACT["url"])
     faqs = [
+        ("どのように、やさしい英語にしていますか？", "原作を一文ずつ直訳するのではなく、長い一文で伝えている内容をいくつもの短い英文に分け、出来事や考えの順序を追いやすくしています。難しい単語も、身近な言葉を使った短い説明に置き換えます。場面・会話・結末を残し、物語全体を中学英語を目安に語り直しています。"),
         ("日本語訳はどうやって見ますか？", "本文の英文を一文タップすると、その英文と対応する日本語訳が開きます。左右端のタップはページ送りです。下部の「対訳」を選ぶと、本文にも英語と日本語訳を並べられます。"),
         ("日本語訳と青空文庫の原文は違いますか？", "一文の日本語訳は、短く書き直した英文に合わせて独自に制作したものです。原文を読むには、対訳パネルの「青空文庫の原文」を開いてください。その文を含む段落の原文を、末尾までスクロールして確認できます。"),
         ("音が出ない、または音読が止まりました。", "iPhoneの音量と音声の出力先、Bluetooth接続を確認してください。「音声と速度」でApple音声を選び、再生ボタンを押してお試しください。着信やイヤホンの取り外し、対訳を開いたときは一時停止する仕様です。対訳を閉じると、その直前に再生していた場合のみ再開します。"),
@@ -174,7 +184,7 @@ def privacy():
 def sources():
     books = "".join(f'<li><div>{e(b["title"])} <span>／ {e(b["author"])}</span></div><a href="{e(b["cardURL"])}">青空文庫の図書カード ↗</a></li>' for b in BOOKS)
     content = f'''<section id="books"><h2>原作と青空文庫</h2><p>本アプリの原作は、青空文庫の公開ファイルを使用しています。作品ごとの底本・入力者・校正者などの出典情報は、アプリの作品情報画面に掲載しています。本アプリは青空文庫の公式アプリではありません。</p><ul class="source-list">{books}</ul><p><a href="https://www.aozora.gr.jp/guide/kijyunn.html">青空文庫収録ファイルの取り扱い規準</a></p></section>
-<section id="translation"><h2>英訳・一文の日本語訳</h2><p>英訳は、原作を中学英語の基本的な語順と身近な言葉で読み進められるよう、独自に制作しています。原文の長い文を短い英文へ分けているため、一文の日本語訳も英文に合わせて別に制作し、青空文庫の原文とは区別して表示します。</p><p>中学英語は制作上の目安です。物語に必要な固有名詞・文化的な語も含まれます。特定の語彙範囲だけで構成した教材や、公式の語学レベル認定を受けた教材としての表示ではありません。</p></section>
+<section id="translation"><h2>名作を、やさしい英語で語り直す</h2><p>原作の一文をそのまま英語へ置き換えるのではなく、伝える内容を整理し、複数の短い英文で説明し直しています。複雑な心理描写も、考えの順序を追える短い文へ。難しい言葉は身近な表現や短い説明に置き換え、場面・会話・結末を残したまま、物語全体を読みやすくつくり直しています。</p><p>たとえば『注文の多い料理店』の冒頭は、原作の一文を7つの短い英文にしています。<a href="../#retelling">実際の原文と英文の例を見る</a>。</p><p>一文の日本語訳は、こうして書き直した英文に合わせて別に制作しています。青空文庫の原文とは区別して表示し、原文も別に参照できます。</p><p>中学英語は制作上の目安です。物語に必要な固有名詞・文化的な語も含まれます。特定の語彙範囲だけで構成した教材や、公式の語学レベル認定を受けた教材としての表示ではありません。</p></section>
 <section id="learning"><h2>学習方針と参考文献</h2><p>理解できる文章を、興味に合わせて多く読む体験を目指しています。アプリ内では、理解可能なインプット仮説と多読の実践・研究結果を分けて紹介しています。読む経験を土台に、会話や作文も目的に応じて組み合わせる考え方です。</p><p>これらは制作上の参考文献で、本アプリ自体の学習効果を測定したものではありません。</p><ul><li><a href="https://www.sdkrashen.com/content/books/principles_and_practice.pdf">Krashen（1982）Principles and Practice in Second Language Acquisition</a></li><li><a href="https://nflrc.hawaii.edu/rfl/item/61">Day &amp; Bamford（2002）Top Ten Principles for Teaching Extensive Reading</a></li><li><a href="https://doi.org/10.1002/tesq.157">Nakanishi（2015）A Meta-Analysis of Extensive Reading Research</a></li><li><a href="https://doi.org/10.1007/s10648-025-10068-6">Sangers ほか（2025）Learning a Language Through Reading</a></li></ul></section>
 <section id="software"><h2>音声・ソフトウェア</h2><p>Apple音声はiOSの標準機能を使用します。任意で使用するSupertonic Swift HelperとONNX RuntimeはMITライセンス、Supertonic 3モデルはOpenRAIL-Mライセンスです。詳細とライセンス文はアプリの「利用しているソフトウェア」から確認できます。</p></section>
 <section id="site"><h2>このサイトについて</h2><p>アプリの紹介、使い方のご案内、お問い合わせ窓口を提供するためのサイトです。掲載する読書画面は実際のアプリの画面です。運営・サポート：<a href="https://github.com/{e(CONFIG['owner'])}">{e(CONFIG['owner'])}</a>。</p><p><a href="../support/">サポート</a> ／ <a href="../privacy/">プライバシーポリシー</a></p></section>'''
