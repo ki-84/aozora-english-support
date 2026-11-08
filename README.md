@@ -54,8 +54,10 @@ Googleフォームを作成し、実際の公開URLを取得してから`site.js
 
 `scripts/build.py`の`contact_notice()`、`support()`、`privacy()`を実際のフォーム設定に合わせて確認し、再生成・検証・PUSHします。Googleフォームは未作成なので、存在しないURLや埋め込み枠は公開していません。
 
-## App Storeへの公開時
+## App Storeの公開リンク
 
-App Storeの製品URLが確定したら`site.json`の`app_store_url`へ設定し、再生成してください。紹介ページにApp Storeへのボタンが表示されます。それまでは「アプリの公開準備中」と表示します。
+[やさしい英語で読む名作 — App Store](https://apps.apple.com/jp/app/id6831897129)
+
+`site.json`の`app_store_url`に製品URLを設定し、紹介ページの先頭に「App Storeで見る」ボタンを表示しています。リンクを変更した場合は再生成してください。
 
 申請時の確認事項は[APP_STORE.md](APP_STORE.md)を参照してください。公開URLの用意は審査の一部で、審査通過を保証するものではありません。
