@@ -79,11 +79,15 @@ def main():
             checked += 1
     home = (OUT / "index.html").read_text()
     books = json.loads((ROOT / "src/books.json").read_text())
-    assert len(books) == 9
-    assert len({book["id"] for book in books}) == 9
+    assert len(books) == 13
+    assert len({book["id"] for book in books}) == 13
     assert "takase" not in {book["id"] for book in books}
     for book in books:
         assert 'id="book-' + book["id"] + '"' in home, book["title"]
+    assert home.count('href="' + CONFIG['app_store_url'] + '"') >= 2
+    assert '217枚' in home and '1.3.0' in home and '公開をお待ちください' in home
+    for book in books:
+        assert (OUT / "assets/covers" / (book["id"] + ".jpg")).is_file()
     assert (OUT / ".nojekyll").is_file()
     sitemap = ET.parse(OUT / "sitemap.xml")
     urls = [node.text for node in sitemap.findall(".//{*}loc")]
@@ -92,7 +96,7 @@ def main():
         assert "template=support.yml" in CONFIG["contact"]["url"]
         assert (ROOT / ".github/ISSUE_TEMPLATE/support.yml").is_file()
         assert "GitHubへのログインが必要" in (OUT / "support/index.html").read_text()
-    print(f"OK: {len(pages)} pages, {checked} references, 9 works, sitemap and contact configuration")
+    print(f"OK: {len(pages)} pages, {checked} references, 13 works, sitemap and contact configuration")
 
 
 if __name__ == "__main__":

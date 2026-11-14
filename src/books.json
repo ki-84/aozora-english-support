@@ -70,5 +70,37 @@
     "author": "芥川龍之介",
     "color": "8A7661",
     "cardURL": "https://www.aozora.gr.jp/cards/000879/card42.html"
+  },
+  {
+    "id": "thousand-years",
+    "title": "千年後の世界",
+    "englishTitle": "A World a Thousand Years Later",
+    "author": "海野十三",
+    "color": "496B81",
+    "cardURL": "https://www.aozora.gr.jp/cards/000160/card877.html"
+  },
+  {
+    "id": "cosmic-dust",
+    "title": "ある宇宙塵の秘密",
+    "englishTitle": "The Secret of a Speck of Space Dust",
+    "author": "海野十三",
+    "color": "5D6389",
+    "cardURL": "https://www.aozora.gr.jp/cards/000160/card866.html"
+  },
+  {
+    "id": "space-fault",
+    "title": "不思議なる空間断層",
+    "englishTitle": "A Strange Break in Space",
+    "author": "海野十三",
+    "color": "587780",
+    "cardURL": "https://www.aozora.gr.jp/cards/000160/card3528.html"
+  },
+  {
+    "id": "brain-controller",
+    "title": "脳波操縦士",
+    "englishTitle": "The Mind Controller",
+    "author": "蘭郁二郎",
+    "color": "7B687E",
+    "cardURL": "https://www.aozora.gr.jp/cards/000325/card43436.html"
   }
 ]
