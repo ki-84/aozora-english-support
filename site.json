@@ -1,13 +1,15 @@
 {
   "name": "やさしい英語で読む名作",
-  "subtitle": "中学英語で、日本の名作を。",
+  "subtitle": "中学英語で、世界の名作を。",
   "base_url": "https://ki-84.github.io/aozora-english-support",
   "owner": "ki-84",
-  "updated": "2026年11月14日",
+  "updated": "2026年11月21日",
   "app_store_url": "https://apps.apple.com/jp/app/id6831897129",
   "contact": {
     "provider": "github",
     "url": "https://github.com/ki-84/aozora-english-support/issues/new?template=support.yml",
     "feedback_url": "https://github.com/ki-84/aozora-english-support/issues/new?template=feature.yml"
-  }
+  },
+  "edition_version": "1.6.0",
+  "illustrations": 575
 }

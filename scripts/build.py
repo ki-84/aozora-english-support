@@ -82,7 +82,7 @@ def page(slug, title, description, body, absolute_assets=False):
 <a class="skip" href="#main">本文へスキップ</a>
 <header class="site-header"><div class="wrap header-inner">
   <a class="brand" href="{prefix}" aria-label="{e(NAME)} ホーム"><img src="{link('assets/app-icon.png')}" width="38" height="38" alt=""><span>{e(NAME)}</span></a>
-  <nav class="site-nav" aria-label="メインナビゲーション"><a class="nav-reading" href="{prefix}#reading">読み方</a><a class="nav-contact" href="{link('support/')}"{nav_support}>サポート</a></nav>
+  <nav class="site-nav" aria-label="メインナビゲーション"><a href="{prefix}#new-books">新刊</a><a class="nav-reading" href="{prefix}#reading">読み方</a><a class="nav-contact" href="{link('support/')}"{nav_support}>サポート</a></nav>
 </div></header>
 {body}
 <footer class="site-footer"><div class="wrap">
@@ -93,37 +93,44 @@ def page(slug, title, description, body, absolute_assets=False):
 </body></html>
 '''
 
-def book_cards():
+def book_cards(books):
     result = []
-    for i, book in enumerate(BOOKS, 1):
+    for book in books:
+        intro = f'<p class="book-intro">{e(book["introduction"])}</p>' if "introduction" in book else ""
+        source_label = "青空文庫の原作" if book["originalLanguage"] == "ja" else "原作と出典"
         result.append(f'''<li><article aria-labelledby="book-{e(book['id'])}">
-          <div class="book-cover" style="--cover:#{e(book['color'])}"><img class="cover-art" src="assets/covers/{e(book['id'])}.jpg" width="360" height="540" loading="lazy" alt=""><span class="edition">AOZORA EDITIONS</span><div class="cover-title"><h3 id="book-{e(book['id'])}">{e(book['title'])}</h3><p>{e(book['author'])}</p></div></div>
-          <div class="book-meta"><p lang="en">{e(book['englishTitle'])}</p><a href="{e(book['cardURL'])}">青空文庫の原作 ↗</a></div>
+          <div class="book-cover" style="--cover:#{e(book['color'])}"><img class="cover-art" src="assets/covers/{e(book['id'])}.jpg" width="360" height="540" loading="lazy" alt=""><div class="cover-title"><h3 id="book-{e(book['id'])}">{e(book['title'])}</h3><p>{e(book['author'])}</p></div></div>
+          <div class="book-meta"><p lang="en">{e(book['englishTitle'])}</p>{intro}<a href="{e(book['cardURL'])}">{source_label}</a></div>
         </article></li>''')
     return "\n".join(result)
 
 def home():
     store = CONFIG.get("app_store_url")
-    first_cta = f'<a class="button blue" href="{e(store)}">App Storeで見る {icon("arrow")}</a>' if store else f'<a class="button blue" href="#retelling">英文の実例を見る {icon("arrow")}</a>'
+    first_cta = f'<a class="button blue" href="{e(store)}">App Storeで見る</a>' if store else '<a class="button blue" href="#retelling">英文の実例を見る</a>'
+    new_books = [book for book in BOOKS if "introduction" in book]
+    earlier_books = [book for book in BOOKS if "introduction" not in book]
     sample_sentences = "".join(f'<li>{e(sentence)}</li>' for sentence in SAMPLE['english'])
     availability = "iPhone / iOS 17以降" if store else "iPhone / iOS 17以降 · アプリの公開準備中"
     bars = "".join(f'<i style="--h:{h}px"></i>' for h in [12,24,38,20,48,64,42,72,54,34,61,44,29,52,36,20,13])
     body = f'''<main id="main">
-<section class="wrap hero" aria-labelledby="hero-title">
-  <div class="hero-copy"><p class="eyebrow">{e(CONFIG['subtitle'])}</p><h1 id="hero-title"><span>名作のつづきが、</span><span><em>英語で読める。</em></span></h1>
-  <p class="hero-lead">原作の長い一文は、いくつもの短い英文に。<br>難しい表現は、身近な言葉で説明し直す。<br>日本の名作を、中学英語を目安に語り直しました。</p><p class="hero-audience">英語を学び直したい大人のための読書アプリ。</p>
-  <div class="actions">{first_cta}<a class="button secondary" href="support/">使い方・サポート</a></div><p class="availability">{availability}</p></div>
-  <figure class="hero-visual"><div class="phone"><img src="assets/illustrated-reader.jpg" width="660" height="1434" alt="『注文の多い料理店』の英文と、二人の青年と白い犬を描いた挿絵が並ぶ更新版の実際の読書画面" fetchpriority="high"></div><figcaption class="screen-note">挿絵入り更新版1.3.0の実画面</figcaption></figure>
+<section class="premiere-hero" aria-labelledby="hero-title"><div class="wrap hero">
+  <div class="hero-copy"><p class="eyebrow">{e(CONFIG['subtitle'])}</p><h1 id="hero-title"><span>名作を、</span><span>やさしい英語で。</span></h1>
+  <p class="hero-lead">白ウサギを追いかけるアリス。探検隊が見つけた未知の台地。長い一文も短い英文に分け、物語を最後まで楽しめる英語に語り直しました。</p>
+  <div class="actions">{first_cta}<a class="button secondary" href="#new-books">新しい5冊を見る</a></div><p class="availability">{availability}</p></div>
+  <figure class="hero-visual"><img class="hero-landscape" src="assets/scenes/alice.jpg" width="900" height="600" alt="" fetchpriority="high"><div class="phone"><img src="assets/alice-reader.jpg" width="660" height="1434" alt="挿絵とやさしい英文が並ぶ『不思議の国のアリス』の読書画面" fetchpriority="high"></div><figcaption class="screen-note">『不思議の国のアリス』の読書画面</figcaption></figure>
+</div></section>
+<div class="wrap promise-strip" aria-label="アプリの特長"><div>{icon('book')}<span>全{len(BOOKS)}作品・挿絵{e(CONFIG['illustrations'])}枚</span></div><div>{icon('translate')}<span>一文ずつの日本語訳</span></div><div>{icon('offline')}<span>オフラインで読書・音読</span></div></div>
+<section class="wrap section premieres" id="new-books" aria-labelledby="new-books-title">
+  <div class="section-heading"><div><p class="eyebrow">アップデート {e(CONFIG['edition_version'])}</p><h2 id="new-books-title">新しい5冊</h2></div><p>このページは{e(CONFIG['edition_version'])}の内容を紹介しています。現在の配信版はApp Storeで確認できます。</p></div>
+  <ol class="book-grid">{book_cards(new_books)}</ol>
 </section>
-<aside class="wrap edition-note" aria-label="挿絵入り更新版について"><strong>NEW EDITION · 1.3.0</strong><p>表紙13枚と挿絵217枚を追加した、次回アップデートをご紹介しています。掲載する挿絵入りの画面は更新版のものです。App Storeでの公開をお待ちください。</p></aside>
-<div class="wrap promise-strip" aria-label="アプリの特長"><div>{icon('book')}<span>13作品を、すべて全文。</span></div><div>{icon('translate')}<span>一文ごとに、日本語訳。</span></div><div>{icon('offline')}<span>本文はオフラインで。</span></div></div>
 <section class="wrap section art-section" id="illustrations" aria-labelledby="art-title">
-  <div class="section-heading"><div><p class="eyebrow">PICTURE THE SCENE. STAY IN THE STORY.</p><h2 id="art-title">英語のすぐそばに、<br>物語の風景を。</h2></div><p>二人が歩く森。小狐の暮らす里。<br>想像を広げる、未来の実験室。</p></div>
+  <div class="section-heading"><div><h2 id="art-title">絵を見て、英語のつづきへ。</h2></div><p>場面が変わるところや、心が動いた直後に。物語に沿って、575枚の挿絵を添えました。</p></div>
   <div class="scene-grid">
-    <figure><img src="assets/scenes/restaurant.jpg" width="900" height="600" loading="lazy" alt="秋の山道を進む、洋風の猟服を着た二人と大きな白い犬二匹"><figcaption><span>宮沢賢治</span>注文の多い料理店</figcaption></figure>
-    <figure><img src="assets/scenes/gon.jpg" width="900" height="600" loading="lazy" alt="秋の里山で、巣穴の前に立つ小さな狐"><figcaption><span>新美南吉</span>ごん狐</figcaption></figure>
-    <figure><img src="assets/scenes/thousand-years.jpg" width="900" height="600" loading="lazy" alt="ベッドや本棚、装置が並ぶ球形の実験室"><figcaption><span>海野十三</span>千年後の世界</figcaption></figure>
-  </div><div class="art-details"><p>場面の切れ目に合わせて、全13作品に217枚の挿絵を。英文の内容を思い浮かべながら読み進められます。絵に触れると拡大でき、本文に戻ると同じページへ。表示設定で挿絵を隠すこともできます。</p><p>表紙と挿絵もすべて同梱。オフラインで楽しめます。本アプリ用にAIを用いて独自制作した画像です。</p></div>
+    <figure><img src="assets/scenes/alice.jpg" width="900" height="600" loading="lazy" alt="森で懐中時計を持つ白ウサギを追うアリス"><figcaption><span>ルイス・キャロル</span>不思議の国のアリス</figcaption></figure>
+    <figure><img src="assets/scenes/lost-world.jpg" width="900" height="600" loading="lazy" alt="密林の向こうに赤い崖が連なる台地を見つけた探検隊"><figcaption><span>コナン・ドイル</span>失われた世界</figcaption></figure>
+    <figure><img src="assets/scenes/little-prince.jpg" width="900" height="600" loading="lazy" alt="夕暮れの麦畑でキツネのそばに座る王子さま"><figcaption><span>サン＝テグジュペリ</span>星の王子さま</figcaption></figure>
+  </div><div class="art-details"><p>挿絵をタップすると拡大でき、閉じると読んでいたページへ戻ります。表紙と挿絵はアプリに同梱しています。</p><p>表紙と挿絵は、本アプリ用にAIを用いて制作しました。</p></div>
 </section>
 <section class="wrap section retelling-section" id="retelling" aria-labelledby="retelling-title">
   <div class="section-heading"><div><p class="eyebrow">CLASSIC STORIES, RETOLD IN SIMPLE ENGLISH</p><h2 id="retelling-title">名作を、やさしい英語で語り直す。</h2></div><p>出来事をひとつずつ、短い文で。<br>言葉の難しさをほどいて、物語はそのままに。</p></div>
@@ -143,12 +150,12 @@ def home():
   <div class="reading-copy"><p class="eyebrow">ONE SENTENCE AT A TIME</p><h2 id="translation-title">わからない一文で、<br>物語を止めない。</h2><p>「この文、どういう意味だろう」。<br>日本語で確かめたら、また英語のつづきへ。<br>一文ずつの対訳が、読む時間を支えます。主な単語の意味も訳のすぐ下に表示。詳しい語義もタップで確かめられます。</p><p class="fine">この文章で、対訳を確認する感覚をお試しください。<br>日本語訳は英文に合わせて制作したもので、原文とは別に表示します。</p></div>
   <div class="quote-card"><p class="quote-label">注文の多い料理店 / THE RESTAURANT OF MANY ORDERS</p><p class="sample-english" lang="en">Two young men were walking deep in the mountains.</p><button type="button" class="translation-toggle" data-translation-toggle aria-expanded="false" aria-controls="sample-translation">{icon('translate')}<span>日本語訳を見る</span></button><div class="translation" id="sample-translation" hidden><p>二人の若い男が山奥を歩いていました。</p><small>この英文に対応する日本語訳</small></div><noscript><div class="translation"><p>二人の若い男が山奥を歩いていました。</p></div></noscript><cite class="quote-credit">原作：宮沢賢治『注文の多い料理店』／英訳・日本語訳：本アプリ独自制作</cite></div>
 </div></section>
-<section class="wrap section" aria-labelledby="books-title"><div class="section-heading"><div><p class="eyebrow">THIRTEEN STORIES, MANY WORLDS</p><h2 id="books-title">あの名作を、もう一度。</h2></div><p>短い寓話から、ミステリー、空想科学まで。<br>13作品すべてを、全文英訳で。</p></div><ol class="book-grid">{book_cards()}</ol><p class="book-note">中学英語は制作上の目安です。固有名詞や、物語を伝えるために必要な言葉も含まれます。</p></section>
+<section class="wrap section" aria-labelledby="books-title"><div class="section-heading"><div><h2 id="books-title">ほかにも読める名作</h2></div><p>日本文学、ミステリー、空想科学。<br>全{len(BOOKS)}作品から、気になる一冊を選べます。</p></div><ol class="book-grid">{book_cards(earlier_books)}</ol><p class="book-note">中学英語は制作上の目安です。固有名詞や、物語を伝えるために必要な言葉も含まれます。</p></section>
 <section class="wrap section" aria-labelledby="listen-title"><div class="listen-panel"><div><p class="eyebrow">READ. LISTEN. RETURN.</p><h2 id="listen-title">目で読んで、耳で聴く。</h2><p>Apple音声ですぐに音読。0.5〜2倍速で、今の自分に合う速さを選べます。再生中の文を追いながら、画面をロックして聴くこともできます。</p><p>任意で音声合成モデル「Supertonic 3」（約380MB）を取得すると、iPhone内で英文から高品質な音声を生成できます。取得後は通信せずに音読できます。本文・対訳はダウンロードなしでオフライン閲覧できます。</p></div><div class="audio-graphic" aria-label="0.5倍から2倍までの音読速度に対応"><div class="waveform" aria-hidden="true">{bars}</div><div class="rate-list"><span>0.5×</span><span>0.75×</span><strong>1.0×</strong><span>1.5×</span><span>2.0×</span></div><p>ログイン・広告・アプリ内課金なし</p></div></div></section>
 <section class="wrap learning" aria-labelledby="learning-title"><div><p class="eyebrow">THE JOY OF UNDERSTANDING</p><h2 id="learning-title">わかる英語を、<br>たっぷり読む。</h2><p>自分にとって読みやすい文章を、内容を楽しみながら読みつづける。「多読」の考え方をヒントに、やさしい英語と一文の対訳を組み合わせました。理論と参考文献はアプリ内でも紹介しています。</p><a href="sources/#learning">学習方針と参考文献について {icon('arrow')}</a></div><p class="margin-note">読みたいから、読む。<br>わかるから、つづく。<br>そんな英語の時間を。</p></section>
 <section class="wrap last-cta" aria-label="App Storeへ"><div><h2>次の一文から、始めよう。</h2><p>名作も、SFも。自分にわかる英語から。</p></div>{first_cta}</section>
 </main>'''
-    return page("", "名作のつづきが、英語で読める。", "原作の長い一文を複数の短い英文に。難しい表現を身近な言葉で説明し直し、中学英語を目安に語り直した日本の名作13作品。一文の日本語訳と音読も使えるiPhoneリーダー。", body)
+    return page("", "名作を、やさしい英語で。", "『不思議の国のアリス』『失われた世界』『星の王子さま』など全27作品。中学英語を目安に語り直した英文を、一文ずつの日本語訳、575枚の挿絵、音読とともに楽しめるiPhoneアプリ。", body)
 
 def document(slug, title, intro, toc, content):
     links = "".join(f'<a href="#{key}">{e(label)}</a>' for key, label in toc)
@@ -164,7 +171,7 @@ def support():
         ("音が出ない、または音読が止まりました。", "iPhoneの音量と音声の出力先、Bluetooth接続を確認してください。「音声と速度」でApple音声を選び、再生ボタンを押してお試しください。着信やイヤホンの取り外し、対訳を開いたときは一時停止する仕様です。対訳を閉じると、その直前に再生していた場合のみ再開します。"),
         ("高品質音声が選べません。", "高品質音声は、音声合成モデル「Supertonic 3」（約380MB）をすべて取得すると選択できます。取得後は、そのモデルを使ってiPhone内で英文から音声を生成します。「音声と速度」からダウンロードしてください。通信状態と空き容量を確認し、Wi-Fiでの取得をおすすめします。未取得の間もApple音声は使えます。"),
         ("音声のダウンロードに失敗・中断した場合は？", "通信状態と十分な空き容量を確認して、もう一度ダウンロードしてください。取得が完了したファイルは再利用されます。取得・合成に失敗した場合もApple音声で読むことができます。"),
-        ("インターネットにつながっていなくても使えますか？", "13作品の本文と日本語訳・原文はアプリに同梱しています。端末に用意されているApple音声と、取得済みの高品質音声は端末内で音読します。高品質音声の初回取得、出典や問い合わせなどの外部リンクを開くときは通信が必要です。"),
+        ("インターネットにつながっていなくても使えますか？", "本文、日本語訳、原文、英和辞書、表紙と挿絵はアプリに同梱しています。端末に用意されているApple音声と、取得済みの高品質音声は端末内で音読します。高品質音声の初回取得、出典や問い合わせなどの外部リンクを開くときは通信が必要です。"),
         ("文字が読みにくい・背景を変えたい。", "読書画面右上の「Aa」から、文字サイズ・行間・背景を変えられます。「紙・白・夜」を選ぶと、設定画面の文字や操作部もその場で切り替わります。"),
         ("どこまで読んだかは保存されますか？", "読書位置と音読位置は別に端末へ保存します。再起動後も保存した位置へ戻れます。音読は自動開始せず、再生ボタンを押すと保存した文の先頭から再開します。アプリ内の前後操作は文単位、ロック画面の前後操作は段落単位です。"),
         ("機種変更やアプリの削除をするとどうなりますか？", "本アプリ独自のクラウド同期はありません。アプリを削除すると端末内の読書記録と音声合成モデルも削除されます。iOSのバックアップや端末移行からの復元はAppleの設定・機能に従います。音声モデルはバックアップの対象外のため、必要に応じて再取得してください。"),
@@ -176,7 +183,7 @@ def support():
 <section id="start"><h2>最初の読み方</h2><ol class="steps-list"><li>本棚で作品を選び、スワイプや左右端のタップで読み進めます。</li><li>意味を確かめたい英文を一文タップすると、その文の日本語訳が開きます。</li><li>音読は下部の「音読する」から。前の文・次の文への移動や、0.5〜2倍速に対応します。</li><li>右上の「Aa」で文字や背景、ヘッドホンのボタンで音声と速度を変えられます。</li></ol><div class="support-topics"><a href="#faq">{icon('help')}よくある質問</a><a href="../privacy/">{icon('book')}データの取り扱い</a><a href="../sources/">{icon('book')}原文と出典</a></div></section>
 <section class="faq" id="faq"><h2>よくある質問</h2>{faq_html}</section>
 <section id="report"><h2>不具合のご報告に添えてほしいこと</h2><p>わかる範囲で、次の内容を添えていただくと確認がスムーズです。</p><ul><li>どの画面で、何をしたときに、何が起きたか</li><li>iPhoneの機種・iOSとアプリのバージョン</li><li>本文・訳の場合は、作品名と該当する短い文</li><li>音読の場合は、Apple音声／高品質音声と再生速度</li></ul><p>スクリーンショットは、個人情報が写っていないことを確認して添付してください。</p><a class="button secondary" href="{e(CONTACT['url'])}">フォームを開く {icon('arrow')}</a></section>
-<section id="environment"><h2>対応環境</h2><p>iOS 17以降のiPhoneに対応しています。本文13作品と対訳は同梱され、ログインは不要です。広告・アプリ内課金・アプリ独自のクラウド同期はありません。</p><p class="updated">ページ更新：{e(CONFIG['updated'])}</p></section>'''
+<section id="environment"><h2>対応環境</h2><p>iOS 17以降のiPhoneに対応しています。アプリを開くと、同梱の本文と対訳をすぐ読めます。広告・アプリ内課金・アプリ独自のクラウド同期はありません。</p><p class="updated">ページ更新：{e(CONFIG['updated'])}</p></section>'''
     return document("support", "サポート", "使い方や、お困りのときの確認方法をご案内します。解決しない場合はお問い合わせフォームからご連絡ください。", [("contact","お問い合わせ"),("start","最初の読み方"),("faq","よくある質問"),("report","不具合のご報告"),("environment","対応環境")], content)
 
 def privacy():
@@ -193,8 +200,8 @@ def privacy():
     return document("privacy", "プライバシーポリシー", "アプリの読書データ、音声、外部サービス、お問い合わせに関する情報の取り扱いを説明します。", [("scope","適用範囲"),("device","端末内の情報"),("network","音声と通信"),("contact-data","お問い合わせ"),("website","ウェブサイト"),("delete","削除とバックアップ"),("change","変更・連絡先")], content)
 
 def sources():
-    books = "".join(f'<li><div>{e(b["title"])} <span>／ {e(b["author"])}</span></div><a href="{e(b["cardURL"])}">青空文庫の図書カード ↗</a></li>' for b in BOOKS)
-    content = f'''<section id="books"><h2>原作と青空文庫</h2><p>本アプリの原作は、青空文庫の公開ファイルを使用しています。作品ごとの底本・入力者・校正者などの出典情報は、アプリの作品情報画面に掲載しています。本アプリは青空文庫の公式アプリではありません。</p><ul class="source-list">{books}</ul><p><a href="https://www.aozora.gr.jp/guide/kijyunn.html">青空文庫収録ファイルの取り扱い規準</a></p></section>
+    books = "".join(f'<li><div>{e(b["title"])} <span>／ {e(b["author"])}</span></div><a href="{e(b["cardURL"])}">{"青空文庫の図書カード" if b["originalLanguage"] == "ja" else "原作と出典"}</a></li>' for b in BOOKS)
+    content = f'''<section id="books"><h2>原作と出典</h2><p>日本文学は青空文庫から、海外作品は英語・フランス語・ドイツ語・チェコ語の原文から語り直しています。作品ごとの底本や、日本作品の入力者・校正者はアプリの作品情報画面で確認できます。</p><ul class="source-list">{books}</ul><p><a href="https://www.aozora.gr.jp/guide/kijyunn.html">青空文庫収録ファイルの取り扱い規準</a></p></section>
 <section id="translation"><h2>名作を、やさしい英語で語り直す</h2><p>原作の一文をそのまま英語へ置き換えるのではなく、伝える内容を整理し、複数の短い英文で説明し直しています。複雑な心理描写も、考えの順序を追える短い文へ。難しい言葉は身近な表現や短い説明に置き換え、場面・会話・結末を残したまま、物語全体を読みやすくつくり直しています。</p><p>たとえば『注文の多い料理店』の冒頭は、原作の一文を7つの短い英文にしています。<a href="../#retelling">実際の原文と英文の例を見る</a>。</p><p>一文の日本語訳は、こうして書き直した英文に合わせて別に制作しています。青空文庫の原文とは区別して表示し、原文も別に参照できます。</p><p>中学英語は制作上の目安です。物語に必要な固有名詞・文化的な語も含まれます。特定の語彙範囲だけで構成した教材や、公式の語学レベル認定を受けた教材としての表示ではありません。</p></section>
 <section id="learning"><h2>学習方針と参考文献</h2><p>理解できる文章を、興味に合わせて多く読む体験を目指しています。アプリ内では、理解可能なインプット仮説と多読の実践・研究結果を分けて紹介しています。読む経験を土台に、会話や作文も目的に応じて組み合わせる考え方です。</p><p>これらは制作上の参考文献で、本アプリ自体の学習効果を測定したものではありません。</p><ul><li><a href="https://www.sdkrashen.com/content/books/principles_and_practice.pdf">Krashen（1982）Principles and Practice in Second Language Acquisition</a></li><li><a href="https://nflrc.hawaii.edu/rfl/item/61">Day &amp; Bamford（2002）Top Ten Principles for Teaching Extensive Reading</a></li><li><a href="https://doi.org/10.1002/tesq.157">Nakanishi（2015）A Meta-Analysis of Extensive Reading Research</a></li><li><a href="https://doi.org/10.1007/s10648-025-10068-6">Sangers ほか（2025）Learning a Language Through Reading</a></li></ul></section>
 <section id="software"><h2>音声・ソフトウェア</h2><p>Apple音声はiOSの標準機能を使用します。任意で使用するSupertonic Swift HelperとONNX RuntimeはMITライセンス、Supertonic 3モデルはOpenRAIL-Mライセンスです。詳細とライセンス文はアプリの「利用しているソフトウェア」から確認できます。</p></section>

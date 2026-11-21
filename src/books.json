@@ -1,106 +1,250 @@
 [
   {
-    "id": "restaurant",
-    "title": "注文の多い料理店",
-    "englishTitle": "The Restaurant of Many Orders",
-    "author": "宮沢賢治",
-    "color": "49675B",
-    "cardURL": "https://www.aozora.gr.jp/cards/000081/card43754.html"
+    "id": "alice-in-wonderland",
+    "title": "不思議の国のアリス",
+    "englishTitle": "Alice’s Adventures in Wonderland",
+    "author": "ルイス・キャロル",
+    "cardURL": "https://standardebooks.org/ebooks/lewis-carroll/alices-adventures-in-wonderland",
+    "originalLanguage": "en",
+    "color": "314D40",
+    "introduction": "白ウサギを追いかけたアリスが、不思議な住人たちと出会う。"
   },
   {
-    "id": "melos",
-    "title": "走れメロス",
-    "englishTitle": "Run, Melos!",
-    "author": "太宰治",
-    "color": "A26743",
-    "cardURL": "https://www.aozora.gr.jp/cards/000035/card1567.html"
+    "id": "happy-prince",
+    "title": "幸福な王子",
+    "englishTitle": "The Happy Prince",
+    "author": "オスカー・ワイルド",
+    "cardURL": "https://www.gutenberg.org/ebooks/902",
+    "originalLanguage": "en",
+    "color": "314D40",
+    "introduction": "金色の像とツバメの出会いが、冬の街を変えていく。"
   },
   {
-    "id": "chair",
-    "title": "人間椅子",
-    "englishTitle": "The Human Chair",
-    "author": "江戸川乱歩",
-    "color": "65576F",
-    "cardURL": "https://www.aozora.gr.jp/cards/001779/card56648.html"
+    "id": "lost-world",
+    "title": "失われた世界",
+    "englishTitle": "The Lost World",
+    "author": "コナン・ドイル",
+    "cardURL": "https://standardebooks.org/ebooks/arthur-conan-doyle/the-lost-world",
+    "originalLanguage": "en",
+    "color": "314D40",
+    "introduction": "若い記者が探検隊とアマゾンへ。地図の先に、未知の台地が待つ。"
   },
   {
-    "id": "spider",
-    "title": "蜘蛛の糸",
-    "englishTitle": "The Spider's Thread",
-    "author": "芥川龍之介",
-    "color": "607387",
-    "cardURL": "https://www.aozora.gr.jp/cards/000879/card92.html"
+    "id": "frankenstein",
+    "title": "フランケンシュタイン",
+    "englishTitle": "Frankenstein",
+    "author": "メアリー・シェリー",
+    "cardURL": "https://standardebooks.org/ebooks/mary-shelley/frankenstein",
+    "originalLanguage": "en",
+    "color": "314D40",
+    "introduction": "北極へ向かう船で、ある科学者が自分の過去を語り始める。"
   },
   {
-    "id": "rashomon",
-    "title": "羅生門",
-    "englishTitle": "Rashomon",
-    "author": "芥川龍之介",
-    "color": "81574E",
-    "cardURL": "https://www.aozora.gr.jp/cards/000879/card127.html"
+    "id": "twenty-thousand-leagues",
+    "title": "海底二万里",
+    "englishTitle": "Twenty Thousand Leagues Under the Seas",
+    "author": "ジュール・ヴェルヌ",
+    "cardURL": "https://www.gutenberg.org/ebooks/5097",
+    "originalLanguage": "fr",
+    "color": "314D40",
+    "introduction": "謎の生き物を追ううちに、海の底を巡る冒険が始まる。"
   },
   {
-    "id": "grove",
-    "title": "藪の中",
-    "englishTitle": "In a Grove",
-    "author": "芥川龍之介",
-    "color": "506C61",
-    "cardURL": "https://www.aozora.gr.jp/cards/000879/card179.html"
+    "id": "sherlock-holmes",
+    "title": "シャーロック・ホームズ短編集",
+    "englishTitle": "Two Adventures of Sherlock Holmes",
+    "author": "コナン・ドイル",
+    "cardURL": "https://standardebooks.org/ebooks/arthur-conan-doyle/the-adventures-of-sherlock-holmes",
+    "originalLanguage": "en",
+    "color": "314D40"
   },
   {
-    "id": "tiger",
-    "title": "山月記",
-    "englishTitle": "The Moon over the Mountain",
-    "author": "中島敦",
-    "color": "6E7185",
-    "cardURL": "https://www.aozora.gr.jp/cards/000119/card624.html"
+    "id": "time-machine",
+    "title": "タイム・マシン",
+    "englishTitle": "The Time Machine",
+    "author": "H・G・ウェルズ",
+    "cardURL": "https://standardebooks.org/ebooks/h-g-wells/the-time-machine",
+    "originalLanguage": "en",
+    "color": "314D40"
   },
   {
-    "id": "gon",
-    "title": "ごん狐",
-    "englishTitle": "Gon, the Little Fox",
-    "author": "新美南吉",
-    "color": "AB754B",
-    "cardURL": "https://www.aozora.gr.jp/cards/000121/card628.html"
+    "id": "little-prince",
+    "title": "星の王子さま",
+    "englishTitle": "The Little Prince",
+    "author": "サン＝テグジュペリ",
+    "cardURL": "https://gutenberg.net.au/ebooks03/0300771h.html",
+    "originalLanguage": "fr",
+    "color": "314D40"
   },
   {
-    "id": "nose",
-    "title": "鼻",
-    "englishTitle": "The Nose",
-    "author": "芥川龍之介",
-    "color": "8A7661",
-    "cardURL": "https://www.aozora.gr.jp/cards/000879/card42.html"
+    "id": "martian-odyssey",
+    "title": "火星のオデッセイ",
+    "englishTitle": "A Martian Odyssey",
+    "author": "スタンリー・G・ワインボウム",
+    "cardURL": "https://www.gutenberg.org/ebooks/23731",
+    "originalLanguage": "en",
+    "color": "314D40"
   },
   {
-    "id": "thousand-years",
-    "title": "千年後の世界",
-    "englishTitle": "A World a Thousand Years Later",
-    "author": "海野十三",
-    "color": "496B81",
-    "cardURL": "https://www.aozora.gr.jp/cards/000160/card877.html"
+    "id": "crystal-egg",
+    "title": "水晶の卵",
+    "englishTitle": "The Crystal Egg",
+    "author": "H・G・ウェルズ",
+    "cardURL": "https://www.gutenberg.org/ebooks/11870",
+    "originalLanguage": "en",
+    "color": "314D40"
   },
   {
-    "id": "cosmic-dust",
-    "title": "ある宇宙塵の秘密",
-    "englishTitle": "The Secret of a Speck of Space Dust",
-    "author": "海野十三",
-    "color": "5D6389",
-    "cardURL": "https://www.aozora.gr.jp/cards/000160/card866.html"
+    "id": "new-accelerator",
+    "title": "新加速剤",
+    "englishTitle": "The New Accelerator",
+    "author": "H・G・ウェルズ",
+    "cardURL": "https://www.gutenberg.org/ebooks/11870",
+    "originalLanguage": "en",
+    "color": "314D40"
   },
   {
-    "id": "space-fault",
-    "title": "不思議なる空間断層",
-    "englishTitle": "A Strange Break in Space",
-    "author": "海野十三",
-    "color": "587780",
-    "cardURL": "https://www.aozora.gr.jp/cards/000160/card3528.html"
+    "id": "rur",
+    "title": "R.U.R.〈ロボット〉",
+    "englishTitle": "Rossum's Universal Robots",
+    "author": "カレル・チャペック",
+    "cardURL": "https://www.gutenberg.org/ebooks/13083",
+    "originalLanguage": "cs",
+    "color": "314D40"
+  },
+  {
+    "id": "doctor-ox",
+    "title": "オクス博士の実験",
+    "englishTitle": "Doctor Ox's Experiment",
+    "author": "ジュール・ヴェルヌ",
+    "cardURL": "https://fr.wikisource.org/wiki/Une_fantaisie_du_docteur_Ox",
+    "originalLanguage": "fr",
+    "color": "314D40"
+  },
+  {
+    "id": "universal-library",
+    "title": "万能図書館",
+    "englishTitle": "The Universal Library",
+    "author": "クルト・ラスヴィッツ",
+    "cardURL": "https://blog-fbg.uni-erfurt.de/2020/04/notizen-aus-dem-gothaer-bibliotheksturm-folge-2/",
+    "originalLanguage": "de",
+    "color": "314D40"
   },
   {
     "id": "brain-controller",
     "title": "脳波操縦士",
     "englishTitle": "The Mind Controller",
     "author": "蘭郁二郎",
-    "color": "7B687E",
-    "cardURL": "https://www.aozora.gr.jp/cards/000325/card43436.html"
+    "cardURL": "https://www.aozora.gr.jp/cards/000325/card43436.html",
+    "originalLanguage": "ja",
+    "color": "7B687E"
+  },
+  {
+    "id": "space-fault",
+    "title": "不思議なる空間断層",
+    "englishTitle": "A Strange Break in Space",
+    "author": "海野十三",
+    "cardURL": "https://www.aozora.gr.jp/cards/000160/card3528.html",
+    "originalLanguage": "ja",
+    "color": "587780"
+  },
+  {
+    "id": "cosmic-dust",
+    "title": "ある宇宙塵の秘密",
+    "englishTitle": "The Secret of a Speck of Space Dust",
+    "author": "海野十三",
+    "cardURL": "https://www.aozora.gr.jp/cards/000160/card866.html",
+    "originalLanguage": "ja",
+    "color": "5D6389"
+  },
+  {
+    "id": "thousand-years",
+    "title": "千年後の世界",
+    "englishTitle": "A World a Thousand Years Later",
+    "author": "海野十三",
+    "cardURL": "https://www.aozora.gr.jp/cards/000160/card877.html",
+    "originalLanguage": "ja",
+    "color": "496B81"
+  },
+  {
+    "id": "nose",
+    "title": "鼻",
+    "englishTitle": "The Nose",
+    "author": "芥川龍之介",
+    "cardURL": "https://www.aozora.gr.jp/cards/000879/card42.html",
+    "originalLanguage": "ja",
+    "color": "8A7661"
+  },
+  {
+    "id": "gon",
+    "title": "ごん狐",
+    "englishTitle": "Gon, the Little Fox",
+    "author": "新美南吉",
+    "cardURL": "https://www.aozora.gr.jp/cards/000121/card628.html",
+    "originalLanguage": "ja",
+    "color": "AB754B"
+  },
+  {
+    "id": "tiger",
+    "title": "山月記",
+    "englishTitle": "The Moon over the Mountain",
+    "author": "中島敦",
+    "cardURL": "https://www.aozora.gr.jp/cards/000119/card624.html",
+    "originalLanguage": "ja",
+    "color": "6E7185"
+  },
+  {
+    "id": "grove",
+    "title": "藪の中",
+    "englishTitle": "In a Grove",
+    "author": "芥川龍之介",
+    "cardURL": "https://www.aozora.gr.jp/cards/000879/card179.html",
+    "originalLanguage": "ja",
+    "color": "506C61"
+  },
+  {
+    "id": "rashomon",
+    "title": "羅生門",
+    "englishTitle": "Rashomon",
+    "author": "芥川龍之介",
+    "cardURL": "https://www.aozora.gr.jp/cards/000879/card127.html",
+    "originalLanguage": "ja",
+    "color": "81574E"
+  },
+  {
+    "id": "spider",
+    "title": "蜘蛛の糸",
+    "englishTitle": "The Spider's Thread",
+    "author": "芥川龍之介",
+    "cardURL": "https://www.aozora.gr.jp/cards/000879/card92.html",
+    "originalLanguage": "ja",
+    "color": "607387"
+  },
+  {
+    "id": "chair",
+    "title": "人間椅子",
+    "englishTitle": "The Human Chair",
+    "author": "江戸川乱歩",
+    "cardURL": "https://www.aozora.gr.jp/cards/001779/card56648.html",
+    "originalLanguage": "ja",
+    "color": "65576F"
+  },
+  {
+    "id": "melos",
+    "title": "走れメロス",
+    "englishTitle": "Run, Melos!",
+    "author": "太宰治",
+    "cardURL": "https://www.aozora.gr.jp/cards/000035/card1567.html",
+    "originalLanguage": "ja",
+    "color": "A26743"
+  },
+  {
+    "id": "restaurant",
+    "title": "注文の多い料理店",
+    "englishTitle": "The Restaurant of Many Orders",
+    "author": "宮沢賢治",
+    "cardURL": "https://www.aozora.gr.jp/cards/000081/card43754.html",
+    "originalLanguage": "ja",
+    "color": "49675B"
   }
 ]
