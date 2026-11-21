@@ -78,19 +78,14 @@ def main():
                     assert dest in pages and fragment in pages[dest].ids, (path, "Missing fragment", ref)
             checked += 1
     home = (OUT / "index.html").read_text()
-    books = json.loads((ROOT / "src/books.json").read_text())
-    assert len(books) == len({book["id"] for book in books}) == 27
-    assert [book["id"] for book in books if "introduction" in book] == [
-        "alice-in-wonderland", "happy-prince", "lost-world", "frankenstein", "twenty-thousand-leagues"
-    ]
-    assert "takase" not in {book["id"] for book in books}
-    for book in books:
-        assert 'id="book-' + book["id"] + '"' in home, book["title"]
-    assert home.count('href="' + CONFIG['app_store_url'] + '"') >= 2
-    assert f'{CONFIG["illustrations"]}枚' in home and CONFIG['edition_version'] in home
-    assert home.count('class="hero-landscape"') == 1 and 'id="new-books"' in home
-    for book in books:
-        assert (OUT / "assets/covers" / (book["id"] + ".jpg")).is_file()
+    assert 'href="' + CONFIG["app_store_url"] + '"' in home
+    assets = {path.relative_to(OUT / "assets").as_posix()
+              for path in (OUT / "assets").rglob("*") if path.is_file()}
+    assert assets == {"site.css", "app-icon.png", "favicon.png"}, assets
+    assert all(set(page.images) <= {"./assets/app-icon.png", "../assets/app-icon.png", BASE + "assets/app-icon.png"}
+               for page in pages.values())
+    support = (OUT / "support/index.html").read_text()
+    assert 'href="' + CONFIG["contact"]["url"] + '"' in support
     assert (OUT / ".nojekyll").is_file()
     sitemap = ET.parse(OUT / "sitemap.xml")
     urls = [node.text for node in sitemap.findall(".//{*}loc")]
@@ -99,7 +94,7 @@ def main():
         assert "template=support.yml" in CONFIG["contact"]["url"]
         assert (ROOT / ".github/ISSUE_TEMPLATE/support.yml").is_file()
         assert "GitHubへのログインが必要" in (OUT / "support/index.html").read_text()
-    print(f"OK: {len(pages)} pages, {checked} references, {len(books)} works, sitemap and contact configuration")
+    print(f"OK: {len(pages)} pages, {checked} references, site assets, sitemap and contact configuration")
 
 
 if __name__ == "__main__":
